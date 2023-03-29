@@ -12,8 +12,11 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     steps:
-      - name: Get Secrets
-        id: secrets
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Logint to vault
+        id: vault
         uses: hashicorp/vault-action@v2.5.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
@@ -27,7 +30,12 @@ jobs:
       - uses: innovationnorway/setup-vault@v1
         with:
           version: '~1.13'
-      - run: |
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+      
+      - name: Run Terraform
+        run: |
           export VAULT_ADDR=${{ secrets.VAULT_ADDR }} ; 
           export VAULT_NAMESPACE=admin ;
           vault status;
@@ -37,34 +45,7 @@ jobs:
           export ARM_CLIENT_SECRET=$(echo $RESULT | jq -r .data.client_secret) ;
           export ARM_TENANT_ID="4cbbeb38-1769-40b9-8585-b9ee5db09550" ;
           export ARM_SUBSCRIPTION_ID="4a1111dc-eb6e-4f7a-bc4f-b547b202cc2d" ;
-          ls -l
-
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-          #with:
-          #terraform_version: 1.1.7:
-          # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -check
-
-      - name: Terraform Init
-        id: init
-        run: terraform init
-      
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
-
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan -no-color -input=false
-        continue-on-error: true
-
-      - name: Terraform Apply
-        id: apply
-        run: terraform apply -auto-approve -input=false
+          ls -l ;
+          terraform init ;
+          terraform plan ;
+          terraform apply -auto-approve ;
