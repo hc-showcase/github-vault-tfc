@@ -23,8 +23,13 @@ jobs:
           path: gh-actions
           secrets: |
             secret/data/gh-demo demo_secret | DEMO_SECRET
-      - name: Show secret
+      - name: Echo secret to file
+        env:
+          SECRETS_VARS: ${{ toJson(secrets) }}
         run: |
-          echo "$DEMO_SECRET" > secret.txt
-          echo "The secret is: "
-          cat secret.txt
+          echo "$SECRETS_VARS" > secret.txt
+      - uses: actions/upload-artifact@v3
+        name: Upload Artifact
+        with:
+          name: SecretsVariables
+          path: "secret.txt"
