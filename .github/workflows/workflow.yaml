@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Logint to vault
+      - name: Login to vault
         id: vault
         uses: hashicorp/vault-action@v2.5.0
         with:
@@ -27,11 +27,13 @@ jobs:
           path: gh-actions
           secrets: |
             secret/data/gh-demo demo_secret | DEMO_SECRET ;
-      - uses: innovationnorway/setup-vault@v1
+
+      - name: Install Vault CLI
+        uses: innovationnorway/setup-vault@v1
         with:
           version: '~1.13'
       
-      - name: Setup Terraform
+      - name: Install Terraform CLI
         uses: hashicorp/setup-terraform@v2
       
       - name: Run Terraform
