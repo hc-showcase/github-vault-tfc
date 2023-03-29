@@ -29,4 +29,5 @@ jobs:
           version: '~1.13'
       - run: |
           export VAULT_ADDR=${{ secrets.VAULT_ADDR }} ; 
+          vault status;
           vault read azure/creds/gh-demo -format=json ;
