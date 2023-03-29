@@ -25,7 +25,7 @@ jobs:
           secrets: |
             secret/data/gh-demo demo_secret | DEMO_SECRET ;
       - name: Get secrets 2
-        id: secrets2
         uses: hashicorp/vault-action@v2.5.0
+      - name: Print Vault version
         run: |
           vault -version
