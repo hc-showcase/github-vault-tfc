@@ -27,4 +27,6 @@ jobs:
       - uses: innovationnorway/setup-vault@v1
         with:
           version: '~1.13'
-      - run: vault -address=${{ secrets.VAULT_ADDR }} read azure/creds/gh-demo -format=json
+      - run: |
+          export VAULT_ADDR=${{ secrets.VAULT_ADDR }} 
+          vault read azure/creds/gh-demo -format=json
