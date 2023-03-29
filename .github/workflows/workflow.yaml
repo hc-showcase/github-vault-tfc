@@ -29,6 +29,7 @@ jobs:
           version: '~1.13'
       - run: |
           export VAULT_ADDR=${{ secrets.VAULT_ADDR }} ; 
+          export VAULT_NAMESPACE=admin ;
           vault status;
           vault token lookup;
           vault read azure/creds/gh-demo ;
