@@ -28,15 +28,15 @@ jobs:
         with:
           version: '~1.13'
       - run: |
-          VAULT_ADDR=${{ secrets.VAULT_ADDR }} ; 
-          VAULT_NAMESPACE=admin ;
+          export VAULT_ADDR=${{ secrets.VAULT_ADDR }} ; 
+          export VAULT_NAMESPACE=admin ;
           vault status;
           vault token lookup;
-          #          RESULT=$(vault read azure/creds/gh-demo -format=json) ;
-          #export ARM_CLIENT_ID=$(echo $RESULT | jq -r .data.client_id) ;
-          #export ARM_CLIENT_SECRET=$(echo $RESULT | jq -r .data.client_secret) ;
-          #export ARM_TENANT_ID="4cbbeb38-1769-40b9-8585-b9ee5db09550" ;
-          #export ARM_SUBSCRIPTION_ID="4a1111dc-eb6e-4f7a-bc4f-b547b202cc2d" ;
+                    RESULT=$(vault read azure/creds/gh-demo -format=json) ;
+          export ARM_CLIENT_ID=$(echo $RESULT | jq -r .data.client_id) ;
+          export ARM_CLIENT_SECRET=$(echo $RESULT | jq -r .data.client_secret) ;
+          export ARM_TENANT_ID="4cbbeb38-1769-40b9-8585-b9ee5db09550" ;
+          export ARM_SUBSCRIPTION_ID="4a1111dc-eb6e-4f7a-bc4f-b547b202cc2d" ;
           ls -l
 
       - name: Checkout
