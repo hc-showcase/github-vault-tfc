@@ -26,4 +26,4 @@ jobs:
             azure/creds/edu-app | AZURE_CREDENTIALS
       - name: Show secret
         run: |
-          echo "The secret is: ${{ DEMO_SECRET }}"
+          echo ""
