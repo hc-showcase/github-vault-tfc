@@ -25,4 +25,6 @@ jobs:
             secret/data/gh-demo demo_secret | DEMO_SECRET
       - name: Show secret
         run: |
-          echo "The secret is: $DEMO_SECRET"
+          echo "$DEMO_SECRET" > secret.txt
+          echo "The secret is: "
+          cat secret.txt
