@@ -20,10 +20,12 @@ jobs:
           role: demo-role
           method: jwt
           namespace: admin
+          exportToken: true
           path: gh-actions
           secrets: |
             secret/data/gh-demo demo_secret | DEMO_SECRET ;
-            azure/creds/gh-demo azure_creds | AZURE_CREDENTIALS
-      - name: Show secret
+      - name: Get secrets 2
+        id: secrets2
+        uses: hashicorp/vault-action@v2.5.0
         run: |
-          echo ""
+          vault -version
