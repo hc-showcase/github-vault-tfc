@@ -31,4 +31,4 @@ jobs:
           export VAULT_ADDR=${{ secrets.VAULT_ADDR }} ; 
           vault status;
           vault token lookup;
-          vault read azure/creds/gh-demo -format=json ;
+          vault read azure/creds/gh-demo ;
