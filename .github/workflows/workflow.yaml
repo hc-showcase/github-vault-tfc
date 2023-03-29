@@ -22,8 +22,7 @@ jobs:
           namespace: admin
           path: gh-actions
           secrets: |
-            secret/data/gh-demo demo_secret | DEMO_SECRET ;
-            azure/creds/edu-app | AZURE_CREDENTIALS
+            azure/creds/gh-demo | AZURE_CREDENTIALS
       - name: Show secret
         run: |
           echo ""
